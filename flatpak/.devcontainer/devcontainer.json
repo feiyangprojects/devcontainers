@@ -1,0 +1,12 @@
+{
+	"name": "Flatpak Dev Container",
+	"build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "RUNTIME": "${localEnv:RUNTIME}",
+            "SDK": "${localEnv:SDK}",
+            "VERSION": "${localEnv:VERSION}"
+        }
+    },
+	"privileged": true
+}
