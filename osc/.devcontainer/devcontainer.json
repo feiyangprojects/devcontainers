@@ -1,0 +1,7 @@
+{
+    "name": "openSUSE Commander Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "privileged": true
+}
