@@ -1,0 +1,3 @@
+pbuilder        pbuilder/mirrorsite     string  https://archive.ubuntu.com/ubuntu
+pbuilder        pbuilder/nomirror       error
+pbuilder        pbuilder/rewrite        boolean false
