@@ -31,7 +31,6 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
       - name: Setup dev container
-        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
         run: |
           npm install --global @devcontainers/cli
       - name: Setup container registry credentials
@@ -39,7 +38,7 @@ jobs:
           CONTAINER_REGISTRY_NAMESPACE: ${{ secrets.CONTAINER_REGISTRY_NAMESPACE }}
           CONTAINER_REGISTRY_USERNAME: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
           CONTAINER_REGISTRY_TOKEN: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
-        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
         run: |
           docker login "$CONTAINER_REGISTRY_NAMESPACE" \
               --username "$CONTAINER_REGISTRY_USERNAME" \
@@ -63,7 +62,7 @@ jobs:
           CONTAINER_REGISTRY_USERNAME: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
           ALIAS: ${{ matrix.alias }}
           VERSION: ${{ matrix.version }}
-        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
         run: |
           docker image tag \
               "$CONTAINER_REGISTRY_NAMESPACE/$CONTAINER_REGISTRY_USERNAME/devcontainer-flatpak:$ALIAS-$VERSION" \
